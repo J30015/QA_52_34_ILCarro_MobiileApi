@@ -9,6 +9,9 @@ import org.testng.annotations.BeforeClass;
 import utils.BaseApi;
 import utils.PropertiesReader;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.given;
 
 public class CarController implements BaseApi {
@@ -41,4 +44,23 @@ public class CarController implements BaseApi {
                 .thenReturn();
 
     }
+    public Response getCar(Car car) {
+        return given()
+                .contentType(ContentType.JSON)
+                .header(AUTH, tokenDto.getAccessToken())
+                .when()
+                .get(BASE_URL + GET_USER_CARS)
+                .thenReturn();
+
+    }
+    public Response getCities() {
+        return given()
+                .contentType(ContentType.JSON)
+                .header(AUTH, tokenDto.getAccessToken())
+                .when()
+                .get(BASE_URL + GET_ALL_CITIES)
+                .thenReturn();
+
+    }
+
 }
