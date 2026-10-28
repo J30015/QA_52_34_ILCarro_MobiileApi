@@ -62,5 +62,13 @@ public class CarController implements BaseApi {
                 .thenReturn();
 
     }
+public Response deleteCar(String serialNumber){
+        return given()
+                .contentType(ContentType.JSON)
+                .header(AUTH, tokenDto.getAccessToken())
+                .when()
+                .delete(BASE_URL + DELETE_CAR_BY_SERIAL_NUMBER+serialNumber)
+                .thenReturn();
 
+}
 }

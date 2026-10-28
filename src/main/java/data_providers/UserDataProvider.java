@@ -12,10 +12,10 @@ import java.util.List;
 
 public class UserDataProvider {
     @DataProvider
-    public Iterator<User> dataProviderForRegistrationWrongPasswordOrEmail() {
+    public Iterator<User> dataProviderForRegistrationWrongPassword() {
         List<User> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader
-                (new FileReader("src/test/resources/wrong_email_or_password.csv"))) {
+                (new FileReader("src/test/resources/wrong_password.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitLine = line.split(",");
@@ -38,10 +38,59 @@ public class UserDataProvider {
     }
 
     @DataProvider
-    public Iterator<User> dataProviderForLoginWrongPasswordOrEmail() {
+    public Iterator<User> dataProviderForRegistrationWrongEmail() {
         List<User> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader
-                (new FileReader("src/test/resources/wrong_email_or_password_for_login.csv"))) {
+                (new FileReader("src/test/resources/wrong_email_for_registration.csv"))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] splitLine = line.split(",");
+                list.add(User.builder()
+                        .firstName(splitLine[0])
+                        .lastName(splitLine[1])
+                        .username(splitLine[2])
+                        .password(splitLine[3]).build());
+                line = bufferedReader.readLine();
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("created exception");
+        }
+        return list.listIterator();
+
+
+    }
+
+    @DataProvider
+    public Iterator<User> dataProviderForLoginWrongPassword() {
+        List<User> list = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader
+                (new FileReader("src/test/resources/wrong_password_for_login.csv"))) {
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] splitLine = line.split(",");
+                list.add(User.builder()
+                        .username(splitLine[0])
+                        .password(splitLine[1]).build());
+                line = bufferedReader.readLine();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("created exception");
+        }
+        return list.listIterator();
+
+
+    }
+
+    @DataProvider
+    public Iterator<User> dataProviderForLoginWrongEmail() {
+        List<User> list = new ArrayList<>();
+        try (BufferedReader bufferedReader = new BufferedReader
+                (new FileReader("src/test/resources/wrong_email_for_login.csv"))) {
             String line = bufferedReader.readLine();
             while (line != null) {
                 String[] splitLine = line.split(",");

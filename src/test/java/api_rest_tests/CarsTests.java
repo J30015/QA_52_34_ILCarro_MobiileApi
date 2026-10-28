@@ -52,8 +52,15 @@ public class CarsTests extends CarController {
         Assert.assertEquals(response.getStatusCode(), 200);
     }
 
+    @Test
+    public void deleteCarPositiveTest() {
+        Car car = CarFactory.positiveCar();
+        addNewCar(car);
+        Response response = deleteCar(car.getSerialNumber());
+        Assert.assertEquals(response.getStatusCode(),200);
 
+
+    }
 }
-
 
 
